@@ -410,8 +410,11 @@ var drawer = React.createClass({
   },
 
   render () {
-    var first = this.props.type === 'overlay' ? this.getMainView() : this.getDrawerView()
-    var second = this.props.type === 'overlay' ? this.getDrawerView() : this.getMainView()
+
+    var mainFirst = (this.props.type === 'overlay') || this.props.side === 'right';
+    
+    var first = mainFirst ? this.getMainView() : this.getDrawerView()
+    var second = mainFirst ? this.getDrawerView() : this.getMainView()
 
     return (
       <View style={this.stylesheet.container} key="drawerContainer" onLayout={this.setViewport}>
