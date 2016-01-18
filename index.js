@@ -46,6 +46,7 @@ var deviceScreen = Dimensions.get('window')
       acceptTap: React.PropTypes.bool,
       acceptPan: React.PropTypes.bool,
       tapToClose: React.PropTypes.bool,
+      supportPan: React.PropTypes.bool,
       styles: React.PropTypes.object,
       onOpen: React.PropTypes.func,
       onOpenStart: React.PropTypes.func,
@@ -74,6 +75,7 @@ var deviceScreen = Dimensions.get('window')
         acceptDoubleTap: false,
         acceptTap: false,
         acceptPan: true,
+        supportPan: true,
         tapToClose: false,
         styles: {},
         onOpen: () => {},
@@ -393,7 +395,7 @@ var deviceScreen = Dimensions.get('window')
           key="main"
           style={[this.stylesheet.main, {width: this.getMainWidth(), height: this.state.viewport.height}]}
           ref="main"
-          {...this.responder.panHandlers}>
+          {...(this.props.supportPan ? this.responder.panHandlers : {})}>
           {this.props.children}
         </View>
       )
@@ -405,7 +407,7 @@ var deviceScreen = Dimensions.get('window')
           key="drawer"
           style={[this.stylesheet.drawer, {width: this.getDrawerWidth(), height: this.state.viewport.height}]}
           ref="drawer"
-          {...this.responder.panHandlers}>
+          {...(this.props.supportPan ? this.responder.panHandlers : {})}>
           {this.props.content}
         </View>
       )
